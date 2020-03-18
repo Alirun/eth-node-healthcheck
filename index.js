@@ -4,7 +4,7 @@ const ethers = require('ethers');
 const http = require('http');
 
 const host = process.env.RPC_HOST || 'localhost';
-const provider = ethers.getDefaultProvider(process.env.NETWORK);
+const provider = new ethers.providers.JsonRpcProvider(process.env.REMOTE_RPC_HOST);
 const localProvider = new ethers.providers.JsonRpcProvider(`http://${host}:8545`);
 const MAX_BLOCK_DIFFERENCE = 3;
 
