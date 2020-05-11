@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  geth-healthcheck:
+    image: .
+    restart: always
+    ports:
+      - 8080:8080
+    environment: 
+      - RPC_HOST=127.0.0.0
+      - RPC_PORT=8545
+      - REMOTE_RPC_HOST=https://infura
+      - PORT=8080
