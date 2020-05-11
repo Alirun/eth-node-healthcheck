@@ -20,8 +20,11 @@ const onHealthcheckRequest = async (req, res) => {
   let networkBlockNum;
 
   try {
+    console.log('Getting last block numbers...')
     localBlockNum = await localProvider.getBlockNumber();
+    console.log('Local block number', localBlockNum)
     networkBlockNum = await provider.getBlockNumber();
+    console.log('Remote block number', networkBlockNum)
   } catch (e) {
     console.error(e);
     res.writeHead(500, { 'Content-Type': 'text/plain' });
