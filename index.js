@@ -10,7 +10,7 @@ const healthCheckPort = process.env.PORT || '8080';
 
 const provider = new ethers.providers.JsonRpcProvider(remoteHost);
 const localProvider = new ethers.providers.JsonRpcProvider(`http://${host}:${port}`);
-const MAX_BLOCK_DIFFERENCE = 3;
+const MAX_BLOCK_DIFFERENCE = 5;
 
 const onHealthcheckRequest = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,6 +36,11 @@ const onHealthcheckRequest = async (req, res) => {
     responseStatus = 200;
   }
   res.writeHead(responseStatus, { 'Content-Type': 'text/plain' });
+
+  if (responseStatus === 200) {
+    return res.end('OK');
+  }
+
   res.end((localBlockNum - networkBlockNum).toString());
 };
 
